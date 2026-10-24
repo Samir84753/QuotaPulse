@@ -1,0 +1,10 @@
+// QuotaPulse Build Configuration
+//
+// To enable real WidgetKit desktop widgets with App Group support:
+// 1. Set your 10-character Apple Developer Team ID below, or export QUOTAPULSE_TEAM_ID in your shell.
+// 2. Ensure your Apple Developer account has the App Group "group.com.quotapulse.shared" enabled.
+//
+// Example:
+// QUOTAPULSE_TEAM_ID = ABC1234567
+
+QUOTAPULSE_TEAM_ID = 

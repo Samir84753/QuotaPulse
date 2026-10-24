@@ -1,0 +1,9 @@
+.build*/
+build/
+*.xcodeproj
+.DS_Store
+.swiftpm/
+_to_delete/
+.claude/
+.orchestration/
+.orchestration_run.log

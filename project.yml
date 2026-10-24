@@ -1,0 +1,64 @@
+name: QuotaPulse
+
+options:
+  bundleIdPrefix: com.quotapulse
+  deploymentTarget:
+    macOS: "14.0"
+
+configFiles:
+  Debug: Config.xcconfig
+  Release: Config.xcconfig
+
+settings:
+  base:
+    DEVELOPMENT_TEAM: $(QUOTAPULSE_TEAM_ID)
+    SWIFT_VERSION: "5.0"
+    MACOSX_DEPLOYMENT_TARGET: "14.0"
+
+packages:
+  QuotaCore:
+    path: .
+
+targets:
+  QuotaPulse:
+    type: application
+    platform: macOS
+    deploymentTarget: "14.0"
+    sources:
+      - Sources/QuotaPulse
+      - path: Resources/AppIcon.icns
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_NAME: QuotaPulse
+        PRODUCT_BUNDLE_IDENTIFIER: com.quotapulse.app
+        INFOPLIST_FILE: Resources/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Resources/QuotaPulse.entitlements
+        GENERATE_INFOPLIST_FILE: NO
+    dependencies:
+      - package: QuotaCore
+        product: QuotaCore
+      - target: QuotaPulseWidget
+
+  QuotaPulseWidget:
+    type: app-extension
+    platform: macOS
+    deploymentTarget: "14.0"
+    sources:
+      - Widget
+    settings:
+      base:
+        PRODUCT_NAME: QuotaPulseWidget
+        PRODUCT_BUNDLE_IDENTIFIER: com.quotapulse.app.widget
+        INFOPLIST_FILE: Widget/Info.plist
+        CODE_SIGN_ENTITLEMENTS: Widget/QuotaPulseWidget.entitlements
+        GENERATE_INFOPLIST_FILE: NO
+    dependencies:
+      - package: QuotaCore
+        product: QuotaCore
+
+schemes:
+  QuotaPulseApp:
+    build:
+      targets:
+        QuotaPulse: all
